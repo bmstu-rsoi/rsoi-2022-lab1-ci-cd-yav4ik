@@ -4,7 +4,7 @@ from src.person import Person
 app = Flask(__name__)
 
 
-@app.route('/persons/<int:person_id>', methods=["GET"])
+@app.route('/api/v1/persons/<int:person_id>', methods=["GET"])
 def get_person(person_id):
     person = Person()
     person_json = person.get_person(person_id)
@@ -13,7 +13,7 @@ def get_person(person_id):
     return person_json
 
 
-@app.route('/persons', methods=["GET"])
+@app.route('/api/v1/persons', methods=["GET"])
 def get_all_person():
     person = Person()
     persons_json = person.get_all_persons()
@@ -22,7 +22,7 @@ def get_all_person():
     return persons_json
 
 
-@app.route('/persons', methods=["POST"])
+@app.route('/api/v1/persons', methods=["POST"])
 def post_person():
     new_person = request.json
     person = Person()
@@ -32,7 +32,7 @@ def post_person():
     app.redirect(location='/persons/new_person["personID"]', code=201)
 
 
-@app.route('/persons/<int:person_id>', methods=["PATCH"])
+@app.route('/api/v1/persons/<int:person_id>', methods=["PATCH"])
 def patch_person(person_id):
     new_person = request.json
     person = Person()
@@ -42,13 +42,13 @@ def patch_person(person_id):
     return person.update_person(new_person, person_id)
 
 
-@app.route('/persons/<int:person_id>', methods=["DELETE"])
+@app.route('/api/v1/persons/<int:person_id>', methods=["DELETE"])
 def delete_person(person_id):
     person = Person()
     person_json = person.get_person(person_id)
     if person_json is None:
         return f"person with id {person_id} not found", 404
-    return f"person with id {person_id} deleted"
+    return f"person with id {person_id} deleted", 204
 
 
 if __name__ == '__main__':

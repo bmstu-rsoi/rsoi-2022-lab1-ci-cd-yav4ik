@@ -65,7 +65,7 @@ class Person:
 
         self.person_from_tuple(tuple_db)
         self.person.update(new_person)
-        self.request_db.update_person(self.person)
+        self.request_db.update_person(self.person, person_id)
         return 1
 
     def delete_person(self, person_id):
