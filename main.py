@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse
-
+app = Flask(__name__)
 
 words = ["Hello", "world"]
 
@@ -11,7 +11,6 @@ class IDResource(Resource):
 
 
 if __name__ == '__main__':
-    app = Flask(__name__)
     api = Api(app)
     api.add_resource(IDResource, "/id", "/id/", "/id/<int:id>")
     app.run(debug=True)
