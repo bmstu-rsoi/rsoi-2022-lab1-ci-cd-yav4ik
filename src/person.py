@@ -32,10 +32,8 @@ class Person:
         if not tuple_db:
             return None
 
-        print(tuple_db)
         self.person_from_tuple(tuple_db)
-        print(self.person)
-        return json.dumps(self.person, separators=(',', ':'))
+        return json.dumps(self.person)
 
     def get_all_persons(self):
         tuple_db = self.request_db.get_all_persons()
