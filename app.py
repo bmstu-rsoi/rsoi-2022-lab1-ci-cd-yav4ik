@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from src.person import Person
 
 app = Flask(__name__)
@@ -11,7 +11,7 @@ def get_person(person_id):
     if person_json is None:
         return f"person with id {person_id} not found", 404
     person_json = jsonify(person_json)
-    return person_json
+    return make_response(person_json, 200)
 
 
 @app.route('/api/v1/persons', methods=["GET"])
