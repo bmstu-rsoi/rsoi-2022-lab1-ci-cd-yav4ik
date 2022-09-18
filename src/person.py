@@ -47,16 +47,11 @@ class Person:
         return json.dumps(persons)
 
     def create_person(self, person):
-        self.request_db.add_person(person)
-        tuple_db = self.request_db.get_person(person["personId"])
+        person_id = self.request_db.add_person(person)
+        tuple_db = self.request_db.get_person(person_id)
         if not tuple_db:
             return None
-
-        self.person_from_tuple(tuple_db)
-        if self.person != person:
-            return None
-
-        return json.dumps(self.person)
+        return person_id
 
     def update_person(self, new_person, person_id):
         tuple_db = self.request_db.get_person(person_id)

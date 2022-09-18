@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, url_for
 from src.person import Person
 
 app = Flask(__name__)
@@ -26,10 +26,10 @@ def get_all_person():
 def post_person():
     new_person = request.json
     person = Person()
-    person_json = person.create_person(new_person)
-    if person_json is None:
+    person_id = person.create_person(new_person)
+    if person_id is None:
         return "something wrong", 500
-    app.redirect(location='/persons/new_person["personID"]', code=201)
+    return app.redirect(location=f'{request.host_url}api/v1/persons/{int(person_id)}', code=201)
 
 
 @app.route('/api/v1/persons/<int:person_id>', methods=["PATCH"])

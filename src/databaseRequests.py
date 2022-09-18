@@ -70,11 +70,13 @@ class DatabaseRequests:
     def add_person(self, new_info):
         db = psycopg2.connect(self.DB_URL, sslmode="require")
         cursor = db.cursor()
-        cursor.execute(f"INSERT INTO persons {new_info['name']}, "
-                       f"{new_info['address']}, {new_info['work']}, {new_info['age']};")
+        cursor.execute(f"INSERT INTO persons (person_id, name, address, work, age) VALUES (DEFAULT, '{new_info['name']}', "
+                       f"'{new_info['address']}', '{new_info['work']}', '{new_info['age']}') RETURNING person_id;")
         db.commit()
+        person_id = cursor.fetchone()
         cursor.close()
         db.close()
+        return person_id[0]
 
     def update_person(self, new_info, person_id):
         db = psycopg2.connect(self.DB_URL, sslmode="require")
