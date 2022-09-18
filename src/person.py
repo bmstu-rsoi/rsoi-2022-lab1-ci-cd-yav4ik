@@ -19,11 +19,11 @@ class Person:
             raise Exception("tuple length is not 5")
 
         self.person = {
-            "personId": tuple_db[0],
-            "name": tuple_db[1],
-            "address": tuple_db[2],
-            "work": tuple_db[3],
-            "age": tuple_db[4]
+            "personId": str(tuple_db[0]),
+            "name": str(tuple_db[1]),
+            "address": str(tuple_db[2]),
+            "work": str(tuple_db[3]),
+            "age": str(tuple_db[4])
         }
 
     def get_person(self, person_id):
@@ -33,7 +33,7 @@ class Person:
             return None
 
         self.person_from_tuple(tuple_db)
-        return json.loads(json.dumps(self.person))
+        return json.dumps(self.person)
 
     def get_all_persons(self):
         tuple_db = self.request_db.get_all_persons()
