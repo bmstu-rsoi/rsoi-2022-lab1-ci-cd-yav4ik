@@ -27,11 +27,14 @@ class Person:
         }
 
     def get_person(self, person_id):
+        print(person_id)
         tuple_db = self.request_db.get_person(person_id)
         if not tuple_db:
             return None
 
+        print(tuple_db)
         self.person_from_tuple(tuple_db)
+        print(self.person)
         return json.dumps(self.person, separators=(',', ':'))
 
     def get_all_persons(self):

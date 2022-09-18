@@ -1,4 +1,4 @@
-from flask import Flask, request, Response
+from flask import Flask, request
 from src.person import Person
 
 app = Flask(__name__)
@@ -11,8 +11,11 @@ def get_person(person_id):
     if person_json is None:
         return f"person with id {person_id} not found", 404
 
-    response = Response(person_json)
-    response.headers['Content-Type'] = 'application/json'
+    response = app.response_class(
+        response=person_json,
+        status=200,
+        mimetype='application/json'
+    )
 
     return response
 
@@ -30,7 +33,7 @@ def get_all_person():
         mimetype='application/json'
     )
 
-    return persons_json
+    return response
 
 
 @app.route('/api/v1/persons', methods=["POST"])
@@ -47,10 +50,11 @@ def post_person():
 def patch_person(person_id):
     new_person = request.json
     person = Person()
+    person.update_person(new_person, person_id)
     person_json = person.get_person(person_id)
     if person_json is None:
         return "something wrong", 500
-    return person_json, 200
+    return "200", 200
 
 
 @app.route('/api/v1/persons/<int:person_id>', methods=["DELETE"])
