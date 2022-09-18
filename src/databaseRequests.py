@@ -81,8 +81,8 @@ class DatabaseRequests:
     def update_person(self, new_info, person_id):
         db = psycopg2.connect(self.DB_URL, sslmode="require")
         cursor = db.cursor()
-        cursor.execute(f"UPDATE persons SET name = {new_info['name']}, address = {new_info['address']}, "
-                       f"work = {new_info['work']}, age = {new_info['age']}, "
+        cursor.execute(f"UPDATE persons SET name = '{new_info['name']}', address = '{new_info['address']}', "
+                       f"work = '{new_info['work']}', age = '{new_info['age']}' "
                        f"WHERE person_id={person_id};")
         db.commit()
         cursor.close()
