@@ -33,7 +33,7 @@ class Person:
             return None
 
         self.person_from_tuple(tuple_db)
-        return json.dumps(self.person)
+        return json.loads(json.dumps(self.person))
 
     def get_all_persons(self):
         tuple_db = self.request_db.get_all_persons()
@@ -71,6 +71,3 @@ class Person:
 
         self.request_db.delete_person(person_id)
         return 1
-
-
-
