@@ -6,7 +6,9 @@ words = ["Hello", "world"]
 
 
 class IDResource(Resource):
-    print(1)
+    def get(self):
+        return words[0] + "" + words[1], 200
+
 
 if __name__ == '__main__':
     app = Flask(__name__)
