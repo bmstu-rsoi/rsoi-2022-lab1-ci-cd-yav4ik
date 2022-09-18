@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for
+from flask import Flask, request
 from src.person import Person
 
 app = Flask(__name__)
@@ -10,7 +10,14 @@ def get_person(person_id):
     person_json = person.get_person(person_id)
     if person_json is None:
         return f"person with id {person_id} not found", 404
-    return person_json
+
+    response = app.response_class(
+        response=person_json,
+        status=200,
+        mimetype='application/json'
+    )
+
+    return response
 
 
 @app.route('/api/v1/persons', methods=["GET"])
