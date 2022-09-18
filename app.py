@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, Response
 from src.person import Person
 
 app = Flask(__name__)
@@ -11,11 +11,8 @@ def get_person(person_id):
     if person_json is None:
         return f"person with id {person_id} not found", 404
 
-    response = app.response_class(
-        response=person_json,
-        status=200,
-        mimetype='application/json'
-    )
+    response = Response(person_json)
+    response.headers['Content-Type'] = 'application/json'
 
     return response
 
