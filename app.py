@@ -11,13 +11,7 @@ def get_person(person_id):
     if person_json is None:
         return f"person with id {person_id} not found", 404
 
-    response = app.response_class(
-        response=person_json,
-        status=200,
-        mimetype='application/json'
-    )
-
-    return response
+    return person_json, 200
 
 
 @app.route('/api/v1/persons', methods=["GET"])
