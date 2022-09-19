@@ -19,11 +19,11 @@ class Person:
             raise Exception("tuple length is not 5")
 
         self.person = {
-            "Id": str(tuple_db[0]),
+            "Id": int(tuple_db[0]),
             "name": str(tuple_db[1]),
             "address": str(tuple_db[2]),
             "work": str(tuple_db[3]),
-            "age": str(tuple_db[4])
+            "age": int(tuple_db[4])
         }
 
     def get_person(self, person_id):
