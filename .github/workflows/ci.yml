@@ -20,8 +20,6 @@ jobs:
             heroku_email: ${{secrets.HEROKU_EMAIL}}
             usedocker: true
 
-      # TODO build, test and deploy project
-
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
 
