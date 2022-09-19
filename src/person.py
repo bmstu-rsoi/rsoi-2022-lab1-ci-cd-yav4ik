@@ -44,7 +44,7 @@ class Person:
             self.person_from_tuple(i)
             persons.append(self.person)
 
-        return json.dumps(persons)
+        return persons
 
     def create_person(self, person):
         person_id = self.request_db.add_person(person)
