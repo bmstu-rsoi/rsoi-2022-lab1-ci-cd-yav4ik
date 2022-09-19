@@ -71,22 +71,26 @@ class DatabaseRequests:
         db = psycopg2.connect(self.DB_URL, sslmode="require")
         cursor = db.cursor()
         cursor.execute(f"INSERT INTO persons (person_id, name, address, work, age) VALUES (DEFAULT, '{new_info['name']}', "
-                       f"'{new_info['address']}', '{new_info['work']}', '{new_info['age']}') RETURNING person_id;")
+                       f"'{new_info['address']}', '{new_info['work']}', '{new_info['age']}') "
+                       f"RETURNING person_id;")
         db.commit()
-        person_id = cursor.fetchone()
+        person = cursor.fetchone()
         cursor.close()
         db.close()
-        return person_id[0]
+        return person[0]
 
     def update_person(self, new_info, person_id):
         db = psycopg2.connect(self.DB_URL, sslmode="require")
         cursor = db.cursor()
         cursor.execute(f"UPDATE persons SET name = '{new_info['name']}', address = '{new_info['address']}', "
                        f"work = '{new_info['work']}', age = '{new_info['age']}' "
-                       f"WHERE person_id={person_id};")
+                       f"WHERE person_id={person_id};"
+                       f"RETURNING person_id, name, address, work, age;")
         db.commit()
+        person = cursor.fetchone()
         cursor.close()
         db.close()
+        return person
 
     def delete_person(self, person_id):
         db = psycopg2.connect(self.DB_URL, sslmode="require")
