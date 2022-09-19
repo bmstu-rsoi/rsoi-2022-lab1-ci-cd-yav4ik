@@ -8,6 +8,7 @@ app = Flask(__name__)
 def get_person(person_id):
     person = Person()
     person_json = person.get_person(person_id)
+    print(person_json)
     if person_json is None:
         return f"person with id {person_id} not found", 404
 
@@ -30,19 +31,18 @@ def post_person():
     person = Person()
     person_id = person.create_person(new_person)
     if person_id is None:
-        return "something wrong", 500
+        return "something wrong", 400
     return app.redirect(location=f'{request.host_url}api/v1/persons/{int(person_id)}', code=201)
 
 
 @app.route('/api/v1/persons/<int:person_id>', methods=["PATCH"])
 def patch_person(person_id):
-    print(1)
     new_person = request.json
     person = Person()
     person.update_person(new_person, person_id)
     person_json = person.get_person(person_id)
     if person_json is None:
-        return "something wrong", 500
+        return "something wrong", 400
 
     return person_json, 200
 
@@ -50,7 +50,7 @@ def patch_person(person_id):
 @app.route('/api/v1/persons/<int:person_id>', methods=["DELETE"])
 def delete_person(person_id):
     person = Person()
-    person_json = person.get_person(person_id)
+    person_json = person.delete_person(person_id)
     if person_json is None:
         return f"person with id {person_id} not found", 404
     return f"person with id {person_id} deleted", 204
