@@ -84,7 +84,7 @@ class DatabaseRequests:
         cursor = db.cursor()
         cursor.execute(f"UPDATE persons SET name = '{new_info['name']}', address = '{new_info['address']}', "
                        f"work = '{new_info['work']}', age = '{new_info['age']}' "
-                       f"WHERE person_id={person_id};"
+                       f"WHERE person_id={person_id}"
                        f"RETURNING person_id, name, address, work, age;")
         db.commit()
         person = cursor.fetchone()

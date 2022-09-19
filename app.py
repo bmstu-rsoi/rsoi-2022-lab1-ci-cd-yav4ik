@@ -11,13 +11,7 @@ def get_person(person_id):
     if person_json is None:
         return f"person with id {person_id} not found", 404
 
-    response = app.response_class(
-        response=person_json,
-        status=200,
-        mimetype='application/json'
-    )
-
-    return response
+    return person_json, 200
 
 
 @app.route('/api/v1/persons', methods=["GET"])
@@ -27,13 +21,7 @@ def get_all_person():
     if persons_json is None:
         return f"there's no persons", 404
 
-    response = app.response_class(
-        response=persons_json,
-        status=200,
-        mimetype='application/json'
-    )
-
-    return response
+    return persons_json, 200
 
 
 @app.route('/api/v1/persons', methods=["POST"])
@@ -48,6 +36,7 @@ def post_person():
 
 @app.route('/api/v1/persons/<int:person_id>', methods=["PATCH"])
 def patch_person(person_id):
+    print(1)
     new_person = request.json
     person = Person()
     person.update_person(new_person, person_id)
@@ -55,13 +44,7 @@ def patch_person(person_id):
     if person_json is None:
         return "something wrong", 500
 
-    response = app.response_class(
-        response=person_json,
-        status=200,
-        mimetype='application/json'
-    )
-
-    return response, 200
+    return person_json, 200
 
 
 @app.route('/api/v1/persons/<int:person_id>', methods=["DELETE"])
