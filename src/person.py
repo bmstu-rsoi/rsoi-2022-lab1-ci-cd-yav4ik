@@ -7,7 +7,7 @@ class Person:
     def __init__(self):
         self.request_db = DatabaseRequests()
         self.person = {
-            "Id": None,
+            "id": None,
             "name": None,
             "address": None,
             "work": None,
@@ -19,7 +19,7 @@ class Person:
             raise Exception("tuple length is not 5")
 
         self.person = {
-            "Id": int(tuple_db[0]),
+            "id": int(tuple_db[0]),
             "name": str(tuple_db[1]),
             "address": str(tuple_db[2]),
             "work": str(tuple_db[3]),
