@@ -10,8 +10,7 @@ def get_person(person_id):
     person_json = person.get_person(person_id)
     if person_json is None:
         return f"person with id {person_id} not found", 404
-    person_json = jsonify(person_json)
-    return make_response(person_json, 200)
+    return person_json
 
 
 @app.route('/api/v1/persons', methods=["GET"])
