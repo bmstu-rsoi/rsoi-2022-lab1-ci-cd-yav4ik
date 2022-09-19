@@ -7,7 +7,7 @@ class Person:
     def __init__(self):
         self.request_db = DatabaseRequests()
         self.person = {
-            "personId": None,
+            "Id": None,
             "name": None,
             "address": None,
             "work": None,
