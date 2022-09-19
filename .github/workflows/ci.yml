@@ -20,6 +20,10 @@ jobs:
             heroku_email: ${{secrets.HEROKU_EMAIL}}
             usedocker: true
 
+      - name: Sleep for 25 seconds
+        run: sleep 25s
+        shell: bash
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
 
